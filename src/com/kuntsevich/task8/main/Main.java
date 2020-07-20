@@ -18,7 +18,11 @@ public class Main {
             book.setBookId(12);
             sqlBookListDao.addBook(book);
             sqlBookListDao.removeBook(book);
+            System.out.println(sqlBookListDao.findById(5));
             System.out.println(sqlBookListDao.findByTitle("Преступление и наказание"));
+            System.out.println(sqlBookListDao.findByGenre("Psychology"));
+            System.out.println(sqlBookListDao.findByPageCount(1225));
+            System.out.println(sqlBookListDao.findByAuthors(List.of("Igor_Blinov", "Valery_Romanchik")));
         } catch (DaoException e) {
             e.printStackTrace();
         } catch (BookCreationException e) {

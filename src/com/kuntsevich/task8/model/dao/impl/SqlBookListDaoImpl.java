@@ -52,6 +52,9 @@ public class SqlBookListDaoImpl implements BookListDao {
             try (PreparedStatement ps = cn.prepareStatement(sql)) {
                 ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
+                    if (!rs.next()) {
+                        throw new DaoException("Book not found");
+                    }
                     String title = rs.getString(2);
                     String genre = rs.getString(3);
                     int pageCount = rs.getInt(4);
