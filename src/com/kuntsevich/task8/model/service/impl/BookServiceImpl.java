@@ -88,6 +88,17 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> findAll() throws ServiceException {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        BookListDao bookListDao = daoFactory.getBookListDao();
+        try {
+            return bookListDao.findAll();
+        } catch (DaoException e) {
+            throw new ServiceException("Books not found", e);
+        }
+    }
+
+    @Override
     public Book findById(String id) throws ServiceException {
         NumberValidator numberValidator = new NumberValidator();
         if (!numberValidator.isNumberStringValid(id)) {
@@ -160,42 +171,6 @@ public class BookServiceImpl implements BookService {
         } catch (DaoException e) {
             throw new ServiceException("Books not found", e);
         }
-    }
-
-    @Override
-    public List<Book> sortById() {
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        BookListDao bookListDao = daoFactory.getBookListDao();
-        return bookListDao.sortById();
-    }
-
-    @Override
-    public List<Book> sortByTitle() {
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        BookListDao bookListDao = daoFactory.getBookListDao();
-        return bookListDao.sortByTitle();
-    }
-
-    @Override
-    public List<Book> sortByGenre() {
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        BookListDao bookListDao = daoFactory.getBookListDao();
-        return bookListDao.sortByGenre();
-    }
-
-    @Override
-    public List<Book> sortByPageCount() {
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        BookListDao bookListDao = daoFactory.getBookListDao();
-        return bookListDao.sortByPageCount();
-    }
-
-    @Override
-    public List<Book> sortByAuthors() {
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        BookListDao bookListDao = daoFactory.getBookListDao();
-        return bookListDao.sortByAuthors();
-
     }
 
     private List<String> splitWords(String text) {

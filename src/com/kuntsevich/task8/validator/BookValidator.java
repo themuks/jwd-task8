@@ -8,11 +8,11 @@ public class BookValidator {
     public static final int MAX_ID_VALUE = 10000;
     public static final int MIN_TITLE_NAME_SIZE = 2;
     public static final int MAX_TITLE_NAME_SIZE = 200;
-    public static final int MIN_GENRE_NAME_LENGTH = 4;
-    public static final int MAX_GENRE_NAME_LENGTH = 16;
-    public static final int MIN_AUTHOR_NAME_LENGTH = 3;
-    public static final int MAX_AUTHOR_NAME_LENGTH = 200;
-    public static final int MIN_PAGE_COUNT_VALUE = 40;
+    public static final int MIN_GENRE_NAME_LENGTH = 3;
+    public static final int MAX_GENRE_NAME_LENGTH = 30;
+    public static final int MIN_AUTHOR_NAME_LENGTH = 2;
+    public static final int MAX_AUTHOR_NAME_LENGTH = 400;
+    public static final int MIN_PAGE_COUNT_VALUE = 20;
     public static final int MAX_PAGE_COUNT_VALUE = 10000;
 
     public boolean isIdValid(int id) {

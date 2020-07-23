@@ -20,4 +20,16 @@ public class BookCreator {
         int id = BookIdGenerator.getInstance().generateId();
         return new Book(id, title, genre, pageCount, authors);
     }
+
+    public Book createBook(int id, String title, String genre, int pageCount, List<String> authors) throws BookCreationException {
+        BookValidator bookValidator = new BookValidator();
+        if (!bookValidator.isIdValid(id)
+                || !bookValidator.isTitleValid(title)
+                || !bookValidator.isGenreValid(genre)
+                || !bookValidator.isPageCountValid(pageCount)
+                || !bookValidator.isAuthorsValid(authors)) {
+            throw new BookCreationException("Some of parameters are incorrect");
+        }
+        return new Book(id, title, genre, pageCount, authors);
+    }
 }

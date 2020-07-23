@@ -11,6 +11,8 @@ public interface BookListDao {
 
     void removeBook(Book book) throws DaoException;
 
+    List<Book> findAll() throws DaoException;
+
     Book findById(int id) throws DaoException;
 
     List<Book> findByTitle(String title) throws DaoException;
@@ -20,14 +22,4 @@ public interface BookListDao {
     List<Book> findByPageCount(int pageCount) throws DaoException;
 
     List<Book> findByAuthors(List<String> authors) throws DaoException;
-
-    List<Book> sortById();
-
-    List<Book> sortByTitle();
-
-    List<Book> sortByGenre();
-
-    List<Book> sortByPageCount();
-
-    List<Book> sortByAuthors();
 }
