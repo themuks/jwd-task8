@@ -1,7 +1,6 @@
 package com.kuntsevich.task8.model.service;
 
 import com.kuntsevich.task8.entity.Book;
-import com.kuntsevich.task8.exception.DaoException;
 import com.kuntsevich.task8.exception.ServiceException;
 
 import java.util.List;

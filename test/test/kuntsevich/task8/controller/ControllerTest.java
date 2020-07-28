@@ -5,16 +5,12 @@ import com.kuntsevich.task8.controller.entity.Request;
 import com.kuntsevich.task8.controller.entity.Response;
 import com.kuntsevich.task8.creator.BookCreator;
 import com.kuntsevich.task8.entity.Book;
-import com.kuntsevich.task8.entity.BookWarehouse;
 import com.kuntsevich.task8.exception.BookCreationException;
 import com.kuntsevich.task8.exception.DaoException;
-import com.kuntsevich.task8.exception.ServiceException;
 import com.kuntsevich.task8.model.dao.BookListDao;
 import com.kuntsevich.task8.model.dao.impl.SqlBookListDaoImpl;
-import com.kuntsevich.task8.model.service.impl.BookServiceImpl;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -23,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.testng.Assert.*;
-import static org.testng.Assert.fail;
 
 public class ControllerTest {
 
