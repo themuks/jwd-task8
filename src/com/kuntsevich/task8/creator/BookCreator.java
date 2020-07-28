@@ -2,7 +2,6 @@ package com.kuntsevich.task8.creator;
 
 import com.kuntsevich.task8.entity.Book;
 import com.kuntsevich.task8.exception.BookCreationException;
-import com.kuntsevich.task8.util.BookIdGenerator;
 import com.kuntsevich.task8.validator.BookValidator;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public class BookCreator {
                 || !bookValidator.isAuthorsValid(authors)) {
             throw new BookCreationException("Some of parameters are incorrect");
         }
-        int id = BookIdGenerator.getInstance().generateId();
+        int id = 0;
         return new Book(id, title, genre, pageCount, authors);
     }
 

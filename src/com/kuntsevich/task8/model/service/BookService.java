@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BookService {
 
-    void addBook(String title, String genre, String pageCount, String authors) throws ServiceException;
+    int addBook(String title, String genre, String pageCount, String authors) throws ServiceException;
 
     void removeBook(String id, String title, String genre, String pageCount, String authors) throws ServiceException;
 

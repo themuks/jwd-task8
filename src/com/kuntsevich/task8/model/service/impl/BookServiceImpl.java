@@ -31,7 +31,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addBook(String title, String genre, String pageCount, String authors) throws ServiceException {
+    public int addBook(String title, String genre, String pageCount, String authors) throws ServiceException {
         if (title == null || genre == null || pageCount == null || authors == null) {
             throw new ServiceException("Some of parameters are null");
         }
@@ -50,9 +50,8 @@ public class BookServiceImpl implements BookService {
         } catch (BookCreationException e) {
             throw new ServiceException("Can't create book", e);
         }
-        System.out.println(book);
         try {
-            bookListDao.addBook(book);
+            return bookListDao.addBook(book);
         } catch (DaoException e) {
             throw new ServiceException("Can't add book", e);
         }

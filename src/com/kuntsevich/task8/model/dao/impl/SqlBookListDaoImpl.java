@@ -7,10 +7,7 @@ import com.kuntsevich.task8.exception.BookCreationException;
 import com.kuntsevich.task8.exception.DaoException;
 import com.kuntsevich.task8.model.dao.BookListDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,30 +20,36 @@ public class SqlBookListDaoImpl implements BookListDao {
     private static final String FIND_ALL_BOOKS_QUERY =
             "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book";
     private static final String FIND_BOOK_BY_ID_QUERY =
-            "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book WHERE bookid = ?";
+            "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book WHERE bookid = ? ORDER BY bookid";
     private static final String FIND_BOOK_BY_TITLE_QUERY =
-            "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book WHERE title = ?";
+            "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book WHERE title = ? ORDER BY title";
     private static final String FIND_BOOK_BY_GENRE_QUERY =
-            "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book WHERE genre = ?";
+            "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book WHERE genre = ? ORDER BY genre";
     private static final String FIND_BOOK_BY_PAGE_COUNT_QUERY =
-            "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book WHERE pagecount = ?";
+            "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book WHERE pagecount = ? ORDER BY pagecount";
     private static final String FIND_BOOK_BY_AUTHORS_QUERY =
-            "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book WHERE authors = ?";
+            "SELECT bookid, title, genre, pagecount, authors FROM book_warehouse.book WHERE authors = ? ORDER BY authors";
     private static final String DELIMITER = " ";
 
     @Override
-    public void addBook(Book book) throws DaoException {
+    public int addBook(Book book) throws DaoException {
         String sql = INSERT_BOOK_QUERY;
+        int id = -1;
         try (Connection connection = ConnectorDb.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setString(2, book.getGenre());
             preparedStatement.setInt(3, book.getPageCount());
             preparedStatement.setString(4, String.join(DELIMITER, getAuthors(book)));
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getInt(1);
+            }
         } catch (SQLException e) {
             throw new DaoException("Database error", e);
         }
+        return id;
     }
 
     @Override

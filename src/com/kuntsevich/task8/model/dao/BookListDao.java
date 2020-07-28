@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookListDao {
 
-    void addBook(Book book) throws DaoException;
+    int addBook(Book book) throws DaoException;
 
     void removeBook(Book book) throws DaoException;
 
